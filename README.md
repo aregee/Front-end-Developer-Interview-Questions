@@ -184,6 +184,40 @@ foo.push(1);
 foo.push(2);
 ```
 
+*Question: How will you make it work (closures anyone)?*
+```html
+<div class="button-group">
+    <button class="button-1">0</button>
+    <button class="button-2">1</button>
+    <button class="button-3">2</button>
+    <button class="button-4">3</button>
+    <button class="button-5">4</button>
+    <button class="button-6">5</button>
+</div>
+```
+
+```javascript
+var buttonGroup = document.getElementsByClassName('button-group')[0];
+buttonGroup = buttonGroup.children;
+for(var i=0; i < buttonGroup.length; i++) {
+    buttonGroup[i].addEventListener('click', function(e) {
+        alert(i);
+    });
+}
+```
+### Solution
+```javascript
+var buttonGroup = document.getElementsByClassName('button-group')[0];
+buttonGroup = buttonGroup.children;
+for(var i=0; i < buttonGroup.length; i++) {
+    (function(i){
+    buttonGroup[i].addEventListener('click', function(e) {
+        alert(i);
+    })})(i);
+}
+```
+
+
 #### Fun Questions:
 
 * What's a cool project that you've recently worked on?
